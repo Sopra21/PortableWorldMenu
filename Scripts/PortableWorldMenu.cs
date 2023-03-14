@@ -110,7 +110,9 @@ public class PortableWorldMenu : UdonSharpBehaviour
         {
             if (currentHeld == 0 && !state)
             {
-                popupIndicator.transform.SetPositionAndRotation(HandPosition.transform.position + CanvasOffset, Quaternion.Euler(new Vector3(HeadPosition.transform.rotation.x, 0f, HeadPosition.transform.rotation.z)));
+                //popupIndicator.transform.SetPositionAndRotation(HandPosition.transform.position + CanvasOffset, Quaternion.Euler(new Vector3(HeadPosition.transform.rotation.x, 0f, HeadPosition.transform.rotation.z)));
+                popupIndicator.transform.position = HandPosition.transform.position + CanvasOffset;
+                popupIndicator.transform.eulerAngles = new Vector3(HeadPosition.transform.eulerAngles.x, 0f, HeadPosition.transform.eulerAngles.z);
                 popupIndicator.SetActive(true);
             }
             currentHeld += Time.deltaTime;
@@ -139,11 +141,15 @@ public class PortableWorldMenu : UdonSharpBehaviour
         state = true;
         if (resetTabOnExit && defaultMenuTab <= 4) _ChangeMenuTo(defaultMenuTab);
         if (isVR){
-            MainCanvas.transform.SetPositionAndRotation((HandPosition.transform.position + CanvasOffset), Quaternion.Euler(HeadPosition.transform.rotation.x, 0f, HeadPosition.transform.rotation.z));
+            //MainCanvas.transform.SetPositionAndRotation((HandPosition.transform.position + CanvasOffset), Quaternion.Euler(HeadPosition.transform.rotation.x, 0f, HeadPosition.transform.rotation.z));
+            MainCanvas.transform.position = HandPosition.transform.position + CanvasOffset;
+            MainCanvas.transform.eulerAngles = new Vector3(HeadPosition.transform.eulerAngles.x, 0f, HeadPosition.transform.eulerAngles.z);
         }
         else
         {
-            MainCanvas.transform.SetPositionAndRotation(DesktopTargetPosition.transform.position, HeadPosition.transform.rotation);
+            //MainCanvas.transform.SetPositionAndRotation(DesktopTargetPosition.transform.position, HeadPosition.transform.rotation);
+            MainCanvas.transform.position = DesktopTargetPosition.transform.position;
+            MainCanvas.transform.eulerAngles = HeadPosition.transform.eulerAngles;
         }
         popupIndicator.SetActive(false);
         MainCanvas.GetComponent<Canvas>().enabled = true;
