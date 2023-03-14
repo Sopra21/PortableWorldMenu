@@ -129,7 +129,7 @@ public class PortableWorldMenu : UdonSharpBehaviour
         }
         if (Input.GetButton("Oculus_CrossPlatform_Button4") || Input.GetButton("Oculus_CrossPlatform_Button2") || Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickHorizontal") != 0 || Input.GetButton("Horizontal") || Input.GetButton("Vertical") || Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0.95f)
         {
-            _DespawnMenu();
+            if (state) _DespawnMenu();
         }
     }
 
